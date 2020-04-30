@@ -65,9 +65,7 @@ public class Turma {
         return new Turma (this);
     }
 
-    public int compareTo(Turma t){
-        return this.nome.compareTo(t.getNome());
-    }
+
 
     //Alinea ii)
     public void insereAluno(Aluno a){
