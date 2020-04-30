@@ -71,6 +71,56 @@ public class Turma {
 
     //Alinea ii)
     public void insereAluno(Aluno a){
-
+        this.alunos.put(a.getNumero(),a.clone());
     }
+
+    //Alinea iii)
+    public Aluno getAluno(String codAluno){
+        return this.alunos.get(codAluno).clone();
+    }
+
+    //Alinea iv)
+    public void removeAluno(String codAluno){
+        this.alunos.remove(codAluno);
+    }
+
+    //Alinea v)
+    public Set<String> todosOsCodigos(){
+        return new TreeSet<>(this.alunos.keySet());
+    }
+
+    //Alinea vi)
+    public int qtsAlunos(){
+        return this.alunos.size();
+    }
+
+
+    //Alinea vii)
+    public Set<Aluno> alunosOrdemAlfabetica(){
+        Set<Aluno> s = new TreeSet<>(new Comparator<Aluno>() {
+            @Override
+            public int compare(Aluno a1, Aluno a2) {
+                if (a1.getNumero().compareTo(a2.getNumero()) > 0) return 1;
+                if (a1.getNumero().compareTo(a2.getNumero()) < 0) return -1;
+                return a1.getNome().compareTo(a2.getNome());
+            }
+        });
+        this.alunos.values().forEach(a ->s.add(a.clone()));
+        return s;
+    }
+
+    //Alinea viii)
+    public Set<Aluno> alunosOrdemDescrescenteNumero(){
+        Set<Aluno> s = new TreeSet<>(new Comparator<Aluno>() {
+            @Override
+            public int compare(Aluno o1, Aluno o2) {
+                if(o1.getNumero().compareTo(o2.getNumero()) > 0) return -1;
+                if(o1.getNumero().compareTo(o2.getNumero()) < 0) return 1;
+                return o1.getNumero().compareTo(o2.getNumero());
+            }
+        });
+        this.alunos.values().forEach(a->s.add(a.clone()));
+        return s;
+    }
+
 }
