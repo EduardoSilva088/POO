@@ -92,6 +92,14 @@ public class Turma {
         return this.alunos.size();
     }
 
+    public void addNota(int nota, String num) {
+        Aluno a = this.alunos.get(num);
+        if (a != null) {
+            a.addNota(nota);
+        }
+    }
+
+
 
     //Alinea vii)
     public Set<Aluno> alunosOrdemAlfabetica(){
