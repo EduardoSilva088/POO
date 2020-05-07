@@ -6,9 +6,18 @@ public class VeiculoPremium extends Veiculo {
         this.taxa = 0.0;
     }
 
-    public VeiculoPremium(String codVeiculo, String marca, String modelo, int ano,
-                          double velMed, double precoTeorico, double classificacao, double nrKms, int nrClientes,double taxa){
-        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes);
+    public VeiculoPremium(String codVeiculo,
+                          String marca,
+                          String modelo,
+                          int ano,
+                          double velMed,
+                          double precoTeorico,
+                          double classificacao,
+                          double nrKms,
+                          int nrClientes,
+                          boolean estaAlugado,
+                          double taxa){
+        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes,estaAlugado);
         setTaxa(taxa);
     }
 

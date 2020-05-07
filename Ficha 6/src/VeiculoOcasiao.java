@@ -6,9 +6,18 @@ public class VeiculoOcasiao extends Veiculo {
         this.promocao = false;
     }
 
-    public VeiculoOcasiao(String codVeiculo, String marca, String modelo, int ano,
-                          double velMed, double precoTeorico, double classificacao, double nrKms, int nrClientes,boolean promocao){
-        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes);
+    public VeiculoOcasiao(String codVeiculo,
+                          String marca,
+                          String modelo,
+                          int ano,
+                          double velMed,
+                          double precoTeorico,
+                          double classificacao,
+                          double nrKms,
+                          int nrClientes,
+                          boolean estaAlugado,
+                          boolean promocao){
+        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes,estaAlugado);
         setPromocao(promocao);
     }
 

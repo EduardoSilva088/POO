@@ -8,7 +8,7 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
     private double classificacao;
     private double nrKms;
     private int nrClientes;
-    //private boolean estaAlugado;
+    private boolean estaAlugado;
 
     public Veiculo(){
         this.codVeiculo = new String();
@@ -20,7 +20,7 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
         this.classificacao = 0;
         this.nrKms = 0;
         this.nrClientes = 0;
-        //this.estaAlugado = false;
+        this.estaAlugado = false;
     }
 
     public Veiculo(String codVeiculo,
@@ -31,7 +31,8 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
                    double precoTeorico,
                    double classificacao,
                    double nrKms,
-                   int nrClientes){
+                   int nrClientes,
+                   boolean estaAlugado){
         this.codVeiculo = codVeiculo;
         this.marca = marca;
         this.modelo = modelo;
@@ -41,7 +42,7 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
         this.classificacao = classificacao;
         this.nrKms = nrKms;
         this.nrClientes = nrClientes;
-        //this.estaAlugado = estaAlugado;
+        this.estaAlugado = estaAlugado;
     }
 
     public Veiculo(Veiculo v){
@@ -54,7 +55,7 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
         setClassificacao(v.getClassificacao());
         setNrKms(v.getNrKms());
         setNrClientes(v.getNrClientes());
-        //setEstaAlugado(v.getEstaAlugado);
+        setEstaAlugado(v.getEstaAlugado());
     }
 
     public String getCodVeiculo(){
@@ -92,12 +93,10 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
     public int getNrClientes(){
         return this.nrClientes;
     }
-/*
+
     public boolean getEstaAlugado(){
         return this.estaAlugado;
     }
-
- */
 
     public void setAno(int ano){
         this.ano = ano;
@@ -122,12 +121,12 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
     public void setNrClientes(int nrClientes){
         this.nrClientes = nrClientes;
     }
-/*
+
     public void setEstaAlugado(boolean estaAlugado){
         this.estaAlugado = estaAlugado;
     }
 
- */
+
 
     public abstract Veiculo clone();
     public abstract double custoRealKm();
@@ -142,7 +141,8 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
          .append(" PrecoTeorico: ").append(this.precoTeorico)
          .append(" Classificacao: ").append(this.classificacao)
          .append(" Nr Kms: ").append(this.nrKms)
-         .append(" Nr Clientes: ").append(this.nrClientes);
+         .append(" Nr Clientes: ").append(this.nrClientes)
+         .append(" Esta Alugado: ").append(this.estaAlugado);
         return s.toString();
     }
 
@@ -157,7 +157,8 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
                 this.velMed == e.velMed &&
                 this.precoTeorico == e.precoTeorico &&
                 this.classificacao == e.classificacao &&
-                this.nrKms == e.nrKms;
+                this.nrKms == e.nrKms &&
+                this.estaAlugado == e.estaAlugado;
     }
 
     public int compareTo(Veiculo v){

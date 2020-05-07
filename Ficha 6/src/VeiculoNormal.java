@@ -12,8 +12,9 @@ public class VeiculoNormal extends Veiculo {
                          double precoTeorico,
                          double classificacao,
                          double nrKms,
-                         int nrClientes){
-        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes);
+                         int nrClientes,
+                         boolean estaAlugado){
+        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes, estaAlugado);
     }
 
     public VeiculoNormal(VeiculoNormal a){

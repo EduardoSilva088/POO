@@ -6,9 +6,18 @@ public class AutocarroInteligente extends Veiculo {
         super();
         this.ocupacao=0;
     }
-    public AutocarroInteligente(String codVeiculo, String marca, String modelo, int ano,
-                                double velMed, double precoTeorico, double classificacao, double nrKms, int nrClientes,double ocupacao) {
-        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes);
+    public AutocarroInteligente(String codVeiculo,
+                                String marca,
+                                String modelo,
+                                int ano,
+                                double velMed,
+                                double precoTeorico,
+                                double classificacao,
+                                double nrKms,
+                                int nrClientes,
+                                boolean estaAlugado,
+                                double ocupacao) {
+        super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes,estaAlugado);
         this.ocupacao = ocupacao;
     }
     public AutocarroInteligente(AutocarroInteligente a){
