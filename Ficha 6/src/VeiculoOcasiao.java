@@ -43,7 +43,7 @@ public class VeiculoOcasiao extends Veiculo {
     }
 
     public double custoRealKm(){
-        return getNrKms() * getPrecoKm();
+        return super.getNrKms() * getPrecoKm();
     }
 
 }
