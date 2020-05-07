@@ -4,8 +4,15 @@ public class VeiculoNormal extends Veiculo {
         super();
     }
 
-    public VeiculoNormal(String codVeiculo, String marca, String modelo, int ano,
-                          double velMed, double precoTeorico, double classificacao, double nrKms, int nrClientes){
+    public VeiculoNormal(String codVeiculo,
+                         String marca,
+                         String modelo,
+                         int ano,
+                         double velMed,
+                         double precoTeorico,
+                         double classificacao,
+                         double nrKms,
+                         int nrClientes){
         super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes);
     }
 

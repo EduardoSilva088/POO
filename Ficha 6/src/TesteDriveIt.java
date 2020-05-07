@@ -64,13 +64,15 @@ public class TesteDriveIt {
             System.out.print(v);
         }
 
-        System.out.println("\nOrdenado VelMedia");
-        a1.addCriterio("VelMediaDecre",new ComparatorVelMed());
-        Iterator<Veiculo> it2 = a1.ordenarVeiculos("VelMediaDecre");
+        System.out.println("\nOrdenado VelMedia Crescente");
+        a1.addCriterio("VelMediaCrescente",new ComparatorVelMed());
+        Iterator<Veiculo> it2 = a1.ordenarVeiculos("VelMediaCrescente");
         while (it2.hasNext()) {
             Veiculo v = it2.next();
             System.out.print(v);
         }
+
+
 
 
 /*

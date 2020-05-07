@@ -44,7 +44,7 @@ public class DriveIt
         return new DriveIt(this);
     }
 
-    //Fase I
+    //FASE I
     public boolean existeVeiculo(String cod){
         return this.veiculos.containsKey(cod);
     }
@@ -182,4 +182,6 @@ public class DriveIt
         }
         return s.iterator();
     }
+
+    //FASE III
 }
