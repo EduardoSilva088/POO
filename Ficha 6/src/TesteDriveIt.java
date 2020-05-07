@@ -46,14 +46,12 @@ public class TesteDriveIt {
 
         a1.alteraPromocao(true);
 
-        System.out.println("Ordenado Set: ");
-        //System.out.println(a1.toString());
-        System.out.println(a1.ordenarVeiculos());
-
-
         System.out.println("Ordenado Lista: ");
         System.out.println(a1.ordenarVeiculosLista());
 
+        System.out.println("Ordenado Set: ");
+        //System.out.println(a1.toString());
+        System.out.println(a1.ordenarVeiculos());
 
         System.out.println("Menos utilizado: " + a1.veiculoMenosUtilizado());
         System.out.println("Mais barato: " + a1.veiculoMaisBarato());

@@ -26,12 +26,12 @@ public abstract class Veiculo  implements Comparable<Veiculo>{
         this.codVeiculo = codVeiculo;
         this.marca = marca;
         this.modelo = modelo;
-        setAno(ano);
-        setVelMed(velMed);
-        setPrecoTeorico(precoTeorico);
-        setClassificacao(classificacao);
-        setNrKms(nrKms);
-        setNrClientes(nrClientes);
+        this.ano = ano;
+        this.velMed = velMed;
+        this.precoTeorico = precoTeorico;
+        this.classificacao = classificacao;
+        this.nrKms = nrKms;
+        this.nrClientes = nrClientes;
     }
 
     public Veiculo(Veiculo v){

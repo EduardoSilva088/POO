@@ -25,14 +25,14 @@ public class VeiculoOcasiao extends Veiculo {
         this.promocao = a;
     }
 
-    public double getPrecoTeorico(){
+    public double getPrecoKm(){
         return this.promocao ? 0.75 * super.getPrecoTeorico() : super.getPrecoTeorico();
     }
 
     public String toString(){
         StringBuilder s = new StringBuilder();
         s.append(super.toString());
-        if(this.promocao) s.append(" Em promocao!").append(getPrecoTeorico());
+        if(this.promocao) s.append(" Em promocao!").append(getPrecoKm());
         else s.append(" Sem promocao!");
         s.append("\n");
         return s.toString();
@@ -43,7 +43,7 @@ public class VeiculoOcasiao extends Veiculo {
     }
 
     public double custoRealKm(){
-        return getNrKms() * getPrecoTeorico();
+        return getNrKms() * getPrecoKm();
     }
 
 }

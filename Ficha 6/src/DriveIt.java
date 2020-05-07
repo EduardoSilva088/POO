@@ -8,29 +8,17 @@ public class DriveIt
 {
     private Map<String,Veiculo> veiculos;
 
-    private boolean promocao;
 
     public DriveIt(){
         this.veiculos = new HashMap<>();
-        this.promocao = false;
     }
 
     public DriveIt(Map<String,Veiculo> velos){
         setVeiculos(velos);
-        this.promocao = false;
     }
 
     public DriveIt(DriveIt drive){
         setVeiculos(drive.getVeiculosC());
-        setPromocao(drive.getPromocao());
-    }
-
-    public boolean getPromocao(){
-        return this.promocao;
-    }
-
-    public void setPromocao(boolean p){
-        this.promocao = p;
     }
 
     public Map<String,Veiculo> getVeiculosC(){
@@ -143,7 +131,6 @@ public class DriveIt
     }
 
     public void alteraPromocao(boolean p){
-        setPromocao(p);
         for(Veiculo v : this.veiculos.values()){
             if (v instanceof VeiculoOcasiao){
                 VeiculoOcasiao e = (VeiculoOcasiao) v;
