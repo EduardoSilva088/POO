@@ -169,7 +169,7 @@ public class DriveIt
                                      .collect(Collectors.toList());
     }
 
-    private static Map<String,Comparator<Veiculo>> ordem = new TreeMap<>();
+    private Map<String,Comparator<Veiculo>> ordem = new TreeMap<>();
 
     public void addCriterio(String c, Comparator<Veiculo> cp){
         ordem.put(c,cp);
