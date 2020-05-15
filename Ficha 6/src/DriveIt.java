@@ -184,4 +184,14 @@ public class DriveIt
     }
 
     //FASE III
+    public List<BonificaKms> daoPontos(){
+        List<BonificaKms> bonificaKmsList = new ArrayList<>();
+        for(Veiculo v : this.veiculos.values()){
+            if(v instanceof VeiculoPremium || v instanceof AutocarroInteligente){
+                BonificaKms bk = (BonificaKms) v.clone();
+                bonificaKmsList.add(bk);
+            }
+        }
+        return bonificaKmsList;
+    }
 }

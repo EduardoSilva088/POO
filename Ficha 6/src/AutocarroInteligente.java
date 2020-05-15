@@ -1,10 +1,12 @@
-public class AutocarroInteligente extends Veiculo {
+public class AutocarroInteligente extends Veiculo implements BonificaKms {
 
     private double ocupacao;
+    private int pontosKm;
 
     public AutocarroInteligente(){
         super();
         this.ocupacao=0;
+        this.pontosKm = 0;
     }
     public AutocarroInteligente(String codVeiculo,
                                 String marca,
@@ -16,13 +18,16 @@ public class AutocarroInteligente extends Veiculo {
                                 double nrKms,
                                 int nrClientes,
                                 boolean estaAlugado,
-                                double ocupacao) {
+                                double ocupacao,
+                                int pontosKm) {
         super(codVeiculo,marca,modelo,ano,velMed,precoTeorico,classificacao,nrKms,nrClientes,estaAlugado);
         this.ocupacao = ocupacao;
+        this.pontosKm = pontosKm;
     }
     public AutocarroInteligente(AutocarroInteligente a){
         super(a);
         this.ocupacao=a.getOcupacao();
+        this.pontosKm = a.getPtsPorKm();
     }
 
     public double getOcupacao() {
@@ -44,12 +49,29 @@ public class AutocarroInteligente extends Veiculo {
     }
 
 
+
+
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
         sb.append(" Taxa de ocupação: ");
         sb.append(this.ocupacao).append("\n");
         return sb.toString();
+    }
+
+    public void definirPtsPorKm(int pts) {
+        this.pontosKm=pts;
+    }
+
+    @Override
+    public int getPtsPorKm() {
+        return pontosKm;
+    }
+
+    @Override
+    public double getPtsVeiculo(Veiculo v) {
+        return pontosKm * v.getNrKms();
     }
 
 }

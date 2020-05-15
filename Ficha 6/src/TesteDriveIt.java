@@ -16,9 +16,6 @@ public class TesteDriveIt {
         VeiculoOcasiao p = new VeiculoOcasiao("7","McLaren","Rs Gt 900", 2012,145,10,9,130,7,false,false);
         VeiculoOcasiao l = new VeiculoOcasiao("8","McLaren","Rs Gt 900a", 2012,145,5,9,30,7,false,false);
 
-        AutocarroInteligente at1 = new AutocarroInteligente("9","Volvo","b",2000,50,30,5.4,3500,50,false,0.7);
-        AutocarroInteligente at2 = new AutocarroInteligente("10","Volvo","a",2000,50,100,5.4,90000,50,false,0.3);
-
 
 
 
@@ -36,8 +33,6 @@ public class TesteDriveIt {
         a1.adiciona(o);
         a1.adiciona(p);
         a1.adiciona(l);
-        a1.adiciona(at1);
-        a1.adiciona(at2);
 
 
         System.out.println("DriveIt 1: ");
