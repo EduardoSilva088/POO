@@ -1,9 +1,10 @@
 package Turma;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Turma {
+public class Turma implements Classificacoes, Serializable{
     private String nome;
     private String codigo;
     private Map<String,Aluno> alunos;
@@ -68,8 +69,10 @@ public class Turma {
 
 
     //Alinea ii)
-    public void insereAluno(Aluno a){
-        this.alunos.put(a.getNumero(),a.clone());
+    public void insereAluno(Aluno a) throws ExisteAlunoException{
+        if(this.alunos.containsKey(a.getNumero()))
+            throw new ExisteAlunoException(a.getNumero());
+        else this.alunos.put(a.getNumero(),a.clone());
     }
 
     //Alinea iii)
@@ -78,8 +81,10 @@ public class Turma {
     }
 
     //Alinea iv)
-    public void removeAluno(String codAluno){
-        this.alunos.remove(codAluno);
+    public void removeAluno(String codAluno) throws NaoExisteAlunoException{
+        if(this.alunos.containsKey(codAluno))
+            this.alunos.remove(codAluno);
+        else throw new NaoExisteAlunoException(codAluno);
     }
 
     //Alinea v)
@@ -123,4 +128,31 @@ public class Turma {
         return s;
     }
 
+    public double mediaClassificacao() {
+        return this.alunos.values().stream()
+                                   .mapToDouble((a->a.mediaClassificacao()))
+                                   .sum() / this.alunos.size();
+    }
+
+    public void gravaTxt(String fileName) throws IOException {
+        PrintWriter p = new PrintWriter(fileName);
+        p.print(this);
+        p.flush();
+        p.close();
+    }
+
+    public void gravarObj(String fileName) throws IOException{
+        ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(fileName));
+        o.writeObject(this);
+        o.flush();
+        o.close();
+    }
+
+    public Turma lerObj(String fileName) throws IOException, ClassNotFoundException{
+        ObjectInputStream o = new ObjectInputStream(new FileInputStream(fileName));
+        Turma res = (Turma) o.readObject();
+        o.close();
+
+        return res;
+    }
 }

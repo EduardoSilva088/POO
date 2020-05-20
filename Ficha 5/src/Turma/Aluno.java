@@ -1,8 +1,12 @@
 package Turma;
 
-public class Aluno implements Comparable<Aluno> {
+import java.io.Serializable;
+import java.util.List;
+
+public class Aluno implements Comparable<Aluno>, Classificacoes, Serializable {
     private String numero;
     private String nome;
+    private List<Double> notas;  //Falta métodos para isto
 
 
     public Aluno() {
@@ -10,9 +14,9 @@ public class Aluno implements Comparable<Aluno> {
         this.nome = new String();
     }
 
-    public Aluno (String num, String nom) {
+    public Aluno (String num, String nome) {
         this.numero = num;
-        this.nome = nom;
+        this.nome = nome;
     }
 
     public Aluno (Aluno al) {
@@ -51,6 +55,15 @@ public class Aluno implements Comparable<Aluno> {
 
     public int compareTo(Aluno a) {
         return this.nome.compareTo(a.getNome());
+    }
+
+    public double mediaClassificacao(){
+        double res = 0;
+
+        //Falta inf
+
+
+        return res;
     }
 
 }
