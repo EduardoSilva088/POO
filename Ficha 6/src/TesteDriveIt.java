@@ -1,10 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class TesteDriveIt {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException, ClassNotFoundException, ExisteVeiculoException {
 
         Veiculo a = new VeiculoNormal("1","Volks","Rs 106",2010,130,7.6,7.5,140,5,false);
         Veiculo b = new VeiculoNormal("2","Peugeot","C",2012,90,6.2,1,1000,1,false);
@@ -21,20 +23,46 @@ public class TesteDriveIt {
 
         DriveIt a1 = new DriveIt();
 
+        try{
+            a1.adiciona(a);
+            a1.adiciona(b);
+            a1.adiciona(c);
+            a1.adiciona(d);
+            a1.adiciona(e);
+            a1.adiciona(o);
+            a1.adiciona(p);
+            a1.adiciona(l);
+            a1.adiciona(o);
+        } catch (ExisteVeiculoException existeVeiculoException){
+            System.out.println("Veiculo já existe. Nr: " + existeVeiculoException.getMessage());
+        }
+
+        try{
+            a1.ExportCsv("TesteCSV.csv");
+        } catch (IOException exp){
+            System.out.println("Erro ao gravar CSV");
+        }
+
+        try{
+            a1.gravarObj("TesteOBJ.obj");
+        } catch (IOException exp){
+            System.out.println("Erro ao gravar!");
+        }
+
+        DriveIt a2 = new DriveIt();
+
+        try{
+            a2 = a2.lerObj("TesteOBJ.obj");
+        } catch (IOException | ClassNotFoundException exp){
+            System.out.println("Erro a ler!!");
+        }
+
+        //System.out.println(a2.toString());
 
 
-        a1.adiciona(a);
-        a1.adiciona(b);
-        a1.adiciona(c);
-        a1.adiciona(d);
-        a1.adiciona(e);
 
 
-        a1.adiciona(o);
-        a1.adiciona(p);
-        a1.adiciona(l);
-
-
+/*
         System.out.println("DriveIt 1: ");
         System.out.println(a1.toString());
 
@@ -67,7 +95,7 @@ public class TesteDriveIt {
             System.out.print(v);
         }
 
-
+*/
 
 
 /*

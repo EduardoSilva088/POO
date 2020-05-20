@@ -1,10 +1,12 @@
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DriveIt
+public class DriveIt implements Serializable
 {
     private Map<String,Veiculo> veiculos;
 
@@ -45,8 +47,12 @@ public class DriveIt
     }
 
     //FASE I
-    public boolean existeVeiculo(String cod){
-        return this.veiculos.containsKey(cod);
+    public boolean existeVeiculo(String cod) throws ExisteVeiculoException {
+        if(!this.veiculos.containsKey(cod))
+            throw new ExisteVeiculoException(cod);
+        else{
+            return true;
+        }
     }
 
     public int quantos(){
@@ -80,8 +86,10 @@ public class DriveIt
         return this.veiculos.get(cod).clone();
     }
 
-    public void adiciona(Veiculo v){
-        this.veiculos.put(v.getCodVeiculo(),v.clone());
+    public void adiciona(Veiculo v) throws ExisteVeiculoException {
+        if(this.veiculos.containsKey(v.getCodVeiculo()))
+            throw new ExisteVeiculoException(v.getCodVeiculo());
+        else this.veiculos.put(v.getCodVeiculo(),v.clone());
     }
 
     public List<Veiculo> getVeiculos(){
@@ -91,24 +99,47 @@ public class DriveIt
     }
 
     public void adiciona(Set<Veiculo> vs){
-        vs.forEach(e->adiciona(e));
+        vs.forEach(e-> {
+            try {
+                adiciona(e);
+            } catch (ExisteVeiculoException existeVeiculoException) {
+                existeVeiculoException.printStackTrace();
+            }
+        });
     }
 
-    public void registarAluguer(String codVeiculo, int numKms){
-        Veiculo veiculo = this.veiculos.get(codVeiculo).clone();
-        double kms = (veiculo.getNrKms() + numKms);
-        veiculo.setNrKms(kms);
-        this.veiculos.replace(codVeiculo,veiculo);
+    public void registarAluguer(String codVeiculo, int numKms) throws ExisteVeiculoException, ValoresNegativosException {
+        if(this.veiculos.containsKey(codVeiculo)){
+            throw new ExisteVeiculoException(codVeiculo);
+        }
+        if(numKms < 0){
+            throw new ValoresNegativosException(numKms);
+        }
+        else{
+            Veiculo veiculo = this.veiculos.get(codVeiculo).clone();
+            double kms = (veiculo.getNrKms() + numKms);
+            veiculo.setNrKms(kms);
+            this.veiculos.replace(codVeiculo,veiculo);
+        }
+
     }
 
-    public void classificarVeiculo(String cod, int classificacao){
-        Veiculo veiculo = this.veiculos.get(cod).clone();
-        int nrClientes = veiculo.getNrClientes();
-        double novaClassificacao = ((double)nrClientes * veiculo.getClassificacao() + (double) classificacao) / (nrClientes+1);
-        nrClientes += 1;
-        veiculo.setClassificacao(novaClassificacao);
-        veiculo.setNrClientes(nrClientes);
-        this.veiculos.replace(cod,veiculo);
+    public void classificarVeiculo(String cod, int classificacao) throws ExisteVeiculoException, ValoresNegativosException {
+        if(this.veiculos.containsKey(cod)){
+            throw new ExisteVeiculoException(cod);
+        }
+        if(classificacao < 0){
+            throw new ValoresNegativosException(classificacao);
+        }
+        else {
+            Veiculo veiculo = this.veiculos.get(cod).clone();
+            int nrClientes = veiculo.getNrClientes();
+            double novaClassificacao = ((double)nrClientes * veiculo.getClassificacao() + (double) classificacao) / (nrClientes+1);
+            nrClientes += 1;
+            veiculo.setClassificacao(novaClassificacao);
+            veiculo.setNrClientes(nrClientes);
+            this.veiculos.replace(cod,veiculo);
+        }
     }
 
     public double custoRealKm(String cod){
@@ -193,5 +224,45 @@ public class DriveIt
             }
         }
         return bonificaKmsList;
+    }
+
+    //FASE IV
+    public void ExportCsv(String file) throws IOException, ClassNotFoundException, FileNotFoundException {
+        PrintWriter writer = new PrintWriter(file);
+        StringBuilder sb = new StringBuilder();
+        for(Veiculo v : this.veiculos.values()) {
+            sb.append(v.getCodVeiculo()).append(',')
+                    .append(v.getMarca()).append(',')
+                    .append(v.getModelo()).append(',')
+                    .append(v.getAno()).append(',')
+                    .append(v.getVelMed()).append(',')
+                    .append(v.getPrecoTeorico()).append(',')
+                    .append(v.getClassificacao()).append(',')
+                    .append(v.getNrKms()).append(',')
+                    .append(v.getNrClientes()).append(',')
+                    .append(v.getEstaAlugado());
+            if(v instanceof VeiculoOcasiao) sb.append(',').append(((VeiculoOcasiao) v).getPromocao()).append('\n');
+            if(v instanceof VeiculoPremium) sb.append(',').append(((VeiculoPremium) v).getTaxa()).append('\n');
+            if(v instanceof AutocarroInteligente) sb.append(',').append(((AutocarroInteligente) v).getOcupacao()).append('\n');
+            if(v instanceof VeiculoNormal) sb.append('\n');
+        }
+        writer.write(sb.toString());
+        writer.flush();
+        writer.close();
+    }
+
+
+    public void gravarObj(String fileName) throws IOException {
+        ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(fileName));
+        o.writeObject(this);
+        o.flush();
+        o.close();
+    }
+
+    public DriveIt lerObj(String fileName) throws IOException, ClassNotFoundException{
+        ObjectInputStream o = new ObjectInputStream(new FileInputStream(fileName));
+        DriveIt res = (DriveIt) o.readObject();
+        o.close();
+        return res;
     }
 }

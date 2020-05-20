@@ -1,4 +1,6 @@
-public abstract class Veiculo  implements Comparable<Veiculo>{
+import java.io.Serializable;
+
+public abstract class Veiculo  implements Comparable<Veiculo>, Serializable {
     private String codVeiculo;
     private String marca;
     private String modelo;
