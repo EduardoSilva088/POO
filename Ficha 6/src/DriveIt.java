@@ -82,8 +82,10 @@ public class DriveIt implements Serializable
         return res;
     }
 
-    public Veiculo getVeiculo(String cod){
-        return this.veiculos.get(cod).clone();
+    public Veiculo getVeiculo(String cod) throws ExisteVeiculoException {
+        if(!(this.veiculos.containsKey(cod)))
+            throw new ExisteVeiculoException(cod);
+        else return this.veiculos.get(cod).clone();
     }
 
     public void adiciona(Veiculo v) throws ExisteVeiculoException {
@@ -109,7 +111,7 @@ public class DriveIt implements Serializable
     }
 
     public void registarAluguer(String codVeiculo, int numKms) throws ExisteVeiculoException, ValoresNegativosException {
-        if(this.veiculos.containsKey(codVeiculo)){
+        if(!this.veiculos.containsKey(codVeiculo)){
             throw new ExisteVeiculoException(codVeiculo);
         }
         if(numKms < 0){
@@ -125,7 +127,7 @@ public class DriveIt implements Serializable
     }
 
     public void classificarVeiculo(String cod, int classificacao) throws ExisteVeiculoException, ValoresNegativosException {
-        if(this.veiculos.containsKey(cod)){
+        if(!this.veiculos.containsKey(cod)){
             throw new ExisteVeiculoException(cod);
         }
         if(classificacao < 0){
